@@ -12,19 +12,19 @@ namespace TeltonikaSender
 
         static void Main(string[] args)
         {
-            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
             byte[] sendbuf = Encoding.UTF8.GetBytes("Merhaba");
             IPEndPoint ep = new IPEndPoint(IPAddress.Broadcast, Port);
 
-            s.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
 
             int sayac = 0;
             while (true)
             {
                 sayac++;
                 sendbuf = Encoding.UTF8.GetBytes(sayac.ToString());
-                s.SendTo(sendbuf, ep);
+                socket.SendTo(sendbuf, ep);
                 //Thread.Sleep(200);
                // Console.WriteLine($"sayac:{sayac}");
             }
